@@ -1,0 +1,10 @@
+name: gitops-gitops-toolkit-catalog
+type: gitops
+description: >-
+  Module to populate a gitops repo with the resources to provision
+  gitops-toolkit-catalog
+tags:
+  - tools
+  - gitops
+versions: []
+id: github.com/cloud-native-toolkit/terraform-gitops-gitops-toolkit-catalog
