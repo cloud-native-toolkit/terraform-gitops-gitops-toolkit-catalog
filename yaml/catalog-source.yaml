@@ -1,0 +1,15 @@
+apiVersion: operators.coreos.com/v1alpha1
+kind: CatalogSource
+metadata:
+  name: ecosystem-engineering-catalog
+  namespace: openshift-marketplace
+  annotations:
+    argocd.argoproj.io/sync-wave: "-10"
+spec:
+  displayName: ecosystem-engineering-catalog
+  publisher: IBM
+  sourceType: grpc
+  image: quay.io/cloudnativetoolkit/ecosysengineer-catalog:latest
+  updateStrategy:
+    registryPoll:
+      interval: 90m
