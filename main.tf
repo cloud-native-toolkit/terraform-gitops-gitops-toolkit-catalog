@@ -1,31 +1,16 @@
 locals {
-  name          = "my-module"
-  yaml_dir      = "${path.cwd}/.tmp/${local.name}/chart/${local.name}"
-  service_url   = "http://${local.name}.${var.namespace}"
-  values_content = {
-  }
+  name          = "ecosystem-engineering-catalog"
+  yaml_dir      = "${path.module}/yaml"
   layer = "services"
   type  = "base"
   application_branch = "main"
-  namespace = var.namespace
+  namespace = "openshift-marketplace"
   layer_config = var.gitops_config[local.layer]
 }
 
-resource null_resource create_yaml {
-  provisioner "local-exec" {
-    command = "${path.module}/scripts/create-yaml.sh '${local.name}' '${local.yaml_dir}'"
-
-    environment = {
-      VALUES_CONTENT = yamlencode(local.values_content)
-    }
-  }
-}
-
 resource gitops_module module {
-  depends_on = [null_resource.create_yaml]
-
   name = local.name
-  namespace = var.namespace
+  namespace = local.namespace
   content_dir = local.yaml_dir
   server_name = var.server_name
   layer = local.layer
